@@ -55,6 +55,13 @@ MeteorImportsPlugin.prototype.apply = function(compiler) {
     compiler.options.resolve.alias['meteor-imports'] = path.join(
       __dirname, './meteor-imports.js');
 
+    // Add a loader to inject the excludes into the meteor-imports require.
+    compiler.options.module.loaders.push({
+      meteorImports: true,
+      test: /meteor-config/,
+      loader: 'json-string-loader?json=' + JSON.stringify({exclude: self.config.exclude})
+    });
+
     // Add a loader to inject this as window in the meteor packages.
     compiler.options.module.loaders.push({
       meteorImports: true,
