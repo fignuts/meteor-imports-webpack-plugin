@@ -63,11 +63,7 @@ The `config` object passed to the plugin must contain at least these properties:
 
 ```javascript
 new MeteorImportsPlugin({
-  ROOT_URL: 'http://localhost:3000/',
-  DDP_DEFAULT_CONNECTION_URL: 'http://localhost:3000/',
-  PUBLIC_SETTINGS: {},
   meteorFolder: 'server',
-  meteorEnv: { NODE_ENV: 'development' },
   exclude: ['ecmascript']
 })
 ```
@@ -84,33 +80,6 @@ new MeteorImportsPlugin({
   meteorFolder: 'meteor'
 })
 ```
-
-#### config.DDP_DEFAULT_CONNECTION_URL
-
-If you are using a Meteor server, point `DDP_DEFAULT_CONNECTION_URL` to your server url. If you are developing in local, start your Meteor server and Webpack-dev-server in different ports.
-
-```bash
-# Start the webpack-dev-server in one terminal window.
-webpack-dev-server # http://localhost:8080
-# And the Meteor server in another.
-cd server && meteor # http://localhost:3000
-```
-
-#### config.PUBLIC_SETTINGS
-
-`PUBLIC_SETTINGS` is the equivalent to the property `public` of [Meteor's settings.json](http://docs.meteor.com/#/full/meteor_settings) file. You can still use a `settings.json` for your server or even import it from Webpack:
-
-```javascript
-var meteorSettings = require('./server/settings.json');
-
-...
-new MeteorImportsPlugin({
-  ...
-  PUBLIC_SETTINGS: meteorSettings.public
-})
-```
-
-Finally, you can use the settings using `Meteor.settings.public` just like you are used to.
 
 #### config.exclude
 
@@ -144,17 +113,6 @@ cat program.json
 ```
 
 If you find that any other package is not useful anymore let me know and I will exclude them by default as well.
-
-#### config.meteorEnv
-
-Meteor 1.3 expects to have this property along with a `NODE_ENV` set to `'production'` or nothing (development).
-
-```javascript
-new MeteorImportsPlugin({
-  ...
-  meteorEnv: { NODE_ENV: 'production' }
-})
-```
 
 ## How to import packages
 
